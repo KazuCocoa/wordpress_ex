@@ -1,6 +1,6 @@
 # WordpressEx
 
-**TODO: Add description**
+For my utils to get posts from wordpress.
 
 ## Installation
 
