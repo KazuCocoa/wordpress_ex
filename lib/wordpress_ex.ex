@@ -8,8 +8,7 @@ defmodule WordpressEx do
   end
 
   defp get_posts(site, query) do
-    post_string = url(site, "posts", query) |> URI.to_string
-    posts = post_string |> HTTPoison.get!
+    posts = url(site, "posts", query) |> URI.to_string |> HTTPoison.get!
     posts.body |> Poison.decode
   end
 
@@ -30,5 +29,6 @@ defmodule WordpressEx do
     |> Enum.reduce("", fn {title, url}, acc ->
       acc <> "- [#{title}](#{url})\n\r"
     end)
+    |> IO.puts
   end
 end
