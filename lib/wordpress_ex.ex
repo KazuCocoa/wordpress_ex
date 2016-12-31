@@ -8,8 +8,14 @@ defmodule WordpressEx do
   end
 
   defp get_posts(site, query) do
-    posts = url(site, "posts", query) |> URI.to_string |> HTTPoison.get!
-    posts.body |> Poison.decode
+    posts_query = url(site, "posts", query) |> URI.to_string
+    case HTTPoison.get(posts_query) do
+      {:ok, posts} ->
+        posts.body |> Poison.decode
+      {:error, message} ->
+        IO.puts "error: #{message}"
+        {:error, message}
+    end
   end
 
   defp get_titles(site, query) do
