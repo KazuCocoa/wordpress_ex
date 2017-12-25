@@ -1,5 +1,5 @@
 defmodule WordpressEx do
-  @period_before "2016-01-01T00:00:00"
+  @period_before "2017-01-01T00:00:00"
 
   defp url(site, item, query) do
     %URI{ %URI{} | host: "public-api.wordpress.com",
@@ -38,3 +38,4 @@ defmodule WordpressEx do
     |> IO.puts
   end
 end
+
