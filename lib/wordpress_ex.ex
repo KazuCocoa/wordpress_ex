@@ -1,8 +1,14 @@
 defmodule WordpressEx do
   alias Jason
   alias HTTPoison
+  alias DateTime
 
-  @period_before "2018-01-01T00:00:00"
+  @period_before ~N[2018-01-01 00:00:00]
+
+  @spec start_date() :: %NaiveDateTime{}
+  def start_date do
+    @period_before
+  end
 
   defp url(site, item, query) do
     %URI{
@@ -44,8 +50,13 @@ defmodule WordpressEx do
     end
   end
 
+  @spec my_posts_markdown() :: [String.t()]
   def my_posts_markdown do
-    get_titles("kazucocoa", [{"tag", "book"}, {"after", @period_before}, {"number", 100}])
+    get_titles("kazucocoa", [
+      {"tag", "book"},
+      {"after", @period_before |> NaiveDateTime.to_iso8601()},
+      {"number", 100}
+    ])
     |> Enum.reduce([], fn {title, url}, acc ->
       new_item =
         "- [#{title}](#{url})\n"
