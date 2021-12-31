@@ -3,7 +3,7 @@ defmodule WordpressEx do
   alias HTTPoison
   alias DateTime
 
-  @period_before ~N[2020-01-01 00:00:00]
+  @period_before ~N[2021-01-01 00:00:00]
 
   @spec start_date() :: %NaiveDateTime{}
   def start_date do
